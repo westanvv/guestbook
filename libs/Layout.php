@@ -1,6 +1,4 @@
 <?PHP
-namespace Doctrine\OXM;
-
     class Layout {
         private $vars;
 
@@ -11,11 +9,14 @@ namespace Doctrine\OXM;
 
 //======================================================================================================================
         public function display($path) {
-            $tpl = @file_get_contents($path);
-            foreach ($this->vars as $key => $value) {
-                $tpl = preg_replace("/{".$key."}/", $value, $tpl);
-            }
-            unset($this->vars);
+            ob_start();
+
+            $tpl = $this->vars;
+            include($path);
+
+            $tpl = ob_get_contents();
+            ob_end_clean();
+
             return $tpl;
         }
     }

@@ -1,0 +1,1 @@
+<?php    define('DB', $_SERVER['DOCUMENT_ROOT']."/db.xml");
